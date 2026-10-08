@@ -3,7 +3,7 @@
 window.JELLYCUT_CONFIG = {
   // Empty = "Coming soon to the App Store" (no link).
   // At launch: "https://apps.apple.com/app/id<APPLE_ID>" (country-neutral URL).
-  appStoreUrl: "",
+  appStoreUrl: "https://apps.apple.com/app/id6817272978",
 
   // Set to true once assets/shot-01.png … shot-05.png exist (portrait, 1179 x 2556 or similar).
   // While false the screenshot section stays hidden.

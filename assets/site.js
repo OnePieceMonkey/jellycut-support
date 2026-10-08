@@ -3,14 +3,22 @@
   var cfg = window.JELLYCUT_CONFIG || {};
   var root = document.documentElement.getAttribute('data-root') || '';
 
-  // App Store CTA: stays a static "Coming soon" label until a URL is configured.
+  // App Store CTA: stays a static "Coming soon" label until a URL is configured,
+  // then becomes Apple's official badge (never restyled: no hover, no transform).
+  var BADGE_ALT = {
+    en: 'Download on the App Store', de: 'Laden im App Store', es: 'Descargar en el App Store',
+    it: 'Scarica su App Store', ja: 'App Storeからダウンロード', ko: 'App Store에서 다운로드하기',
+    zh: '在 App Store 下载', ar: 'حمّل من App Store'
+  };
   var cta = document.getElementById('store-cta');
   if (cta && cfg.appStoreUrl) {
+    var lang = (document.documentElement.lang || 'en').slice(0, 2);
+    if (!BADGE_ALT[lang]) lang = 'en';
     var a = document.createElement('a');
-    a.className = 'cta';
+    a.className = 'store-badge';
     a.href = cfg.appStoreUrl;
-    a.innerHTML = cta.querySelector('svg') ? cta.querySelector('svg').outerHTML : '';
-    a.appendChild(document.createTextNode(cta.getAttribute('data-live-label') || 'Download on the App Store'));
+    a.innerHTML = '<img src="' + root + 'assets/badges/app-store-badge-' + lang + '.svg" alt="'
+      + BADGE_ALT[lang] + '" height="48">';
     cta.replaceWith(a);
     var note = document.getElementById('store-note');
     if (note) note.hidden = true;
